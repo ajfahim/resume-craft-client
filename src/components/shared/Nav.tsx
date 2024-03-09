@@ -1,27 +1,69 @@
-import { UserButton } from "@clerk/nextjs";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { SignOutButton } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/server";
+import { LayoutDashboard, LogOut, User2 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { ThemeToggle } from "./ThemeToggle";
 
 type NavProps = {
   user: User | null;
 };
 
 const Nav = ({ user }: NavProps) => {
-  console.log("🚀 ~ Nav ~ user:", user);
   return (
-    <nav className="f-full bg-accent flex justify-between h-14 items-center px-5">
-      <h1 className="text-2xl font-bold text-primary">Resume Craft</h1>
-      <span>
+    <nav className=" border-b-2 border-accent flex justify-between h-20 items-center px-5">
+      <h1 className="text-2xl font-bold">
+        <Link href="/">
+          Resume<span className="text-primary">Craft</span>
+        </Link>
+      </h1>
+      <span className="flex gap-2">
+        <ThemeToggle />
         {user != null ? (
-          <UserButton afterSignOutUrl="/sign-in" />
+          <>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Avatar>
+                  {/* <UserButton afterSignOutUrl="/sign-in" /> */}
+
+                  <AvatarImage src={user.imageUrl} />
+                  <AvatarFallback className="uppercase bg-primary text-primary-foreground">
+                    {user.firstName?.slice(0, 2)}
+                  </AvatarFallback>
+                </Avatar>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="font-bold" align="center">
+                <DropdownMenuItem className="space-x-3">
+                  <User2 className="text-primary" />
+                  <Link href={"/user-profile"}>Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="space-x-3">
+                  <LayoutDashboard className="text-primary" />
+                  <Link href={"/dashboard"}>Dashboard</Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem className="space-x-3">
+                  <LogOut className="text-primary" />
+                  <SignOutButton />
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </>
         ) : (
           <span className="space-x-2">
             <Link href={"/sign-in"}>
               <Button>Sign In</Button>
             </Link>
             <Link href={"/sign-up"}>
-              <Button>Sign Up</Button>
+              <Button variant="secondary">Sign Up</Button>
             </Link>
           </span>
         )}

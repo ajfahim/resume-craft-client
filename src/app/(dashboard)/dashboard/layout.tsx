@@ -9,13 +9,9 @@ export default async function Layout({
 }) {
   const user = await currentUser();
   return (
-    <html lang="en">
-      <body className="">
-        <span className="flex gap-4">
-          <Sidebar />
-          <main>{children}</main>
-        </span>
-      </body>
-    </html>
+    <span className="flex gap-4">
+      <Sidebar />
+      <main>{children}</main>
+    </span>
   );
 }
