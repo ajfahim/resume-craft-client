@@ -36,18 +36,25 @@ const Nav = ({ user }: NavProps) => {
 
                   <AvatarImage src={user.imageUrl} />
                   <AvatarFallback className="uppercase bg-primary text-primary-foreground">
-                    {user.firstName?.slice(0, 2)}
+                    {`${user.firstName?.slice(0, 1)}${user.lastName?.slice(
+                      0,
+                      1
+                    )}`}
                   </AvatarFallback>
                 </Avatar>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="font-bold" align="center">
-                <DropdownMenuItem className="space-x-3">
-                  <User2 className="text-primary" />
-                  <Link href={"/user-profile"}>Profile</Link>
+                <DropdownMenuItem>
+                  <Link className="flex gap-3" href={"/user-profile"}>
+                    <User2 className="text-primary" />
+                    <span>Profile</span>
+                  </Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="space-x-3">
-                  <LayoutDashboard className="text-primary" />
-                  <Link href={"/dashboard"}>Dashboard</Link>
+                <DropdownMenuItem>
+                  <Link className="flex gap-3" href={"/dashboard"}>
+                    <LayoutDashboard className="text-primary" />
+                    <span>Dashboard</span>
+                  </Link>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem className="space-x-3">

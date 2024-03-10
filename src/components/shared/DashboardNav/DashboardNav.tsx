@@ -12,7 +12,7 @@ const DashboardNav = () => {
         <Link key={index} href={item.href}>
           <span
             className={cn(
-              "flex gap-3 px-4 py-4 text-sm rounded-md hover:bg-accent hover:text-accent-foreground",
+              "flex gap-3 px-4 py-4 text-sm rounded-sm hover:bg-accent hover:text-accent-foreground",
               pathName === item.href
                 ? "bg-accent text-accent-foreground"
                 : "bg-transparent"

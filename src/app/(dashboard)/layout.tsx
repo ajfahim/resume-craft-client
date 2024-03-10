@@ -9,9 +9,9 @@ export default async function Layout({
 }) {
   const user = await currentUser();
   return (
-    <span className="flex gap-4">
+    <span className="grid grid-cols-[250px_1fr] gap-8">
       <Sidebar />
-      <main>{children}</main>
+      <main className="mt-8">{children}</main>
     </span>
   );
 }
